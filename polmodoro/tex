@@ -1,0 +1,24 @@
+//uncontrolled/controlled components
+
+/*
+function (name:string){
+  return{
+    onChange: ()=>void
+    onClick: ()=>void
+    onSubmit: ()=>void
+
+  }
+}
+*/
+
+/*
+  ciração de formulario
+  register :registrar novos campos
+  handleSubmit :função de submit
+  watch :observar mudanças nos campos
+  
+  @hookform/resolvers
+
+  validaçaõ lib js
+  yupi joy zood
+  */
