@@ -1,9 +1,10 @@
-import { ButtonHTMLAttributes, createContext, useState } from "react";
+import { ButtonHTMLAttributes, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import { Coutdown } from "./components/Coutdown";
 import { NewCycleForm } from "./components/NewCicleForm";
+import { CyclesContext } from "../../contexts/CyclesContexts";
 
 const ButtonInitialNewCycle = ({
   ...props
@@ -28,15 +29,6 @@ const ButtonFinalNewCycle = ({
   );
 };
 
-interface CyclesContextType {
-  activeCycle: Cycle | undefined;
-  cycleActiveId: string | null;
-  amountSecondsPassed: number;
-  markCurrentCycleAsFinished: () => void;
-  setAmountPassed: (seconds: number) => void;
-}
-export const CyclesContext = createContext({} as CyclesContextType);
-
 const newCicleFormValidarionScheme = zod.object({
   task: zod.string().min(1, "informe a tarefa"),
   minutesAmount: zod
@@ -47,22 +39,9 @@ const newCicleFormValidarionScheme = zod.object({
 
 type NewCycleFormData = zod.infer<typeof newCicleFormValidarionScheme>;
 
-interface Cycle {
-  id: string;
-  task: string;
-  minutesAmount: number;
-  startDate: Date;
-  interruptedDate?: Date;
-  fineshedDate?: Date;
-}
-
 export default function Home() {
-  const [cycles, setCycles] = useState<Cycle[]>([]);
-  const [cycleActiveId, setCycleActiveId] = useState<string | null>(null);
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
-
-  const activeCycle = cycles.find((cycle) => cycle.id === cycleActiveId);
-
+  const { activeCycle, createNewCycle, interruptCycle } =
+    useContext(CyclesContext);
   const newCycleForm = useForm<NewCycleFormData>({
     resolver: zodResolver(newCicleFormValidarionScheme),
     defaultValues: {
@@ -77,70 +56,25 @@ export default function Home() {
 
   const isSubmitDisabled = !task;
 
-  function markCurrentCycleAsFinished() {
-    setCycles((state) =>
-      state.map((cycle) => {
-        if (cycle.id == cycleActiveId) {
-          return { ...cycle, interruptedDate: new Date() };
-        } else {
-          return cycle;
-        }
-      })
-    );
-    setCycleActiveId(null);
-  }
-  function handleCreateNewCycle(data: NewCycleFormData) {
-    const id = String(new Date().getTime());
-    const newCycle: Cycle = {
-      id,
-      minutesAmount: data.minutesAmount,
-      task: data.task,
-      startDate: new Date(),
-    };
-    setCycles((state) => [...state, newCycle]);
-    setCycleActiveId(id);
-    setAmountSecondsPassed(0);
+  function handleCeateNewCycle(data: NewCycleFormData) {
+    createNewCycle(data);
     reset();
   }
-  function handleInterruptCycle() {
-    setCycles((state) =>
-      state.map((cycle) => {
-        if (cycle.id == cycleActiveId) {
-          return { ...cycle, interruptedDate: new Date() };
-        } else {
-          return cycle;
-        }
-      })
-    );
-    setCycleActiveId(null);
-  }
-  function setAmountPassed(seconds: number) {
-    setAmountSecondsPassed(seconds);
-  }
+
   return (
     <>
       <div className="flex w-full justify-center ">
         <form
           className="flex flex-col gap-14 max-w-5xl"
-          onSubmit={handleSubmit(handleCreateNewCycle)}
+          onSubmit={handleSubmit(handleCeateNewCycle)}
         >
-          <CyclesContext.Provider
-            value={{
-              activeCycle,
-              cycleActiveId,
-              amountSecondsPassed,
-              markCurrentCycleAsFinished,
-              setAmountPassed,
-            }}
-          >
-            <FormProvider {...newCycleForm}>
-              <NewCycleForm />
-            </FormProvider>
+          <FormProvider {...newCycleForm}>
+            <NewCycleForm />
+          </FormProvider>
 
-            <Coutdown />
-          </CyclesContext.Provider>
+          <Coutdown />
           {activeCycle ? (
-            <ButtonFinalNewCycle onClick={() => handleInterruptCycle()}>
+            <ButtonFinalNewCycle onClick={() => interruptCycle()}>
               Parar
             </ButtonFinalNewCycle>
           ) : (

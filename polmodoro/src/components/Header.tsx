@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/imgs/Logo.svg";
+import logo from "../assets/imgs/Logo.png";
 import clock from "../assets/imgs/clock.png";
 import list from "../assets/imgs/list.png";
 

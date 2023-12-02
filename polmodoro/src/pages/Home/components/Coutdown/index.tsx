@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { CyclesContext } from "../..";
+import { useContext, useEffect } from "react";
 import { differenceInSeconds } from "date-fns";
+import { CyclesContext } from "../../../../contexts/CyclesContexts";
 
 const TimeNumber = ({ ...props }) => (
   <span

@@ -4,8 +4,8 @@ import {
   forwardRef,
   useContext,
 } from "react";
-import { CyclesContext } from "../..";
 import { useFormContext } from "react-hook-form";
+import { CyclesContext } from "../../../../contexts/CyclesContexts";
 
 const TaskLabel = ({ ...props }: LabelHTMLAttributes<HTMLLabelElement>) => (
   <label className="font-bold" {...props} />
