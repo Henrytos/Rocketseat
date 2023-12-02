@@ -1,33 +1,11 @@
-import { ButtonHTMLAttributes, useContext } from "react";
+import { useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import { Coutdown } from "./components/Coutdown";
 import { NewCycleForm } from "./components/NewCicleForm";
 import { CyclesContext } from "../../contexts/CyclesContexts";
-
-const ButtonInitialNewCycle = ({
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <button
-    type="submit"
-    className="bg-green-500/80 text-gray-50 flex h-16 
-            justify-center items-center rounded-md disabled:bg-green-500/20 disabled:cursor-not-allowed disabled:text-gray-300 transition-colors"
-    {...props}
-  />
-);
-const ButtonFinalNewCycle = ({
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) => {
-  return (
-    <button
-      type="button"
-      className="bg-red-500/80 text-gray-50 flex h-16 
-            justify-center items-center rounded-md disabled:bg-green-500/20 disabled:cursor-not-allowed disabled:text-gray-300 transition-colors"
-      {...props}
-    />
-  );
-};
+import { Buttons } from "./components/Buttons";
 
 const newCicleFormValidarionScheme = zod.object({
   task: zod.string().min(1, "informe a tarefa"),
@@ -40,8 +18,7 @@ const newCicleFormValidarionScheme = zod.object({
 type NewCycleFormData = zod.infer<typeof newCicleFormValidarionScheme>;
 
 export default function Home() {
-  const { activeCycle, createNewCycle, interruptCycle } =
-    useContext(CyclesContext);
+  const { cycles, createNewCycle } = useContext(CyclesContext);
   const newCycleForm = useForm<NewCycleFormData>({
     resolver: zodResolver(newCicleFormValidarionScheme),
     defaultValues: {
@@ -61,6 +38,13 @@ export default function Home() {
     reset();
   }
 
+  const quantityCiclesFocus = cycles.reduce((acum, cycle) => {
+    if (cycle.fineshedDate) {
+      return acum + 1;
+    }
+    return acum;
+  }, 0);
+
   return (
     <>
       <div className="flex w-full justify-center ">
@@ -73,15 +57,11 @@ export default function Home() {
           </FormProvider>
 
           <Coutdown />
-          {activeCycle ? (
-            <ButtonFinalNewCycle onClick={() => interruptCycle()}>
-              Parar
-            </ButtonFinalNewCycle>
-          ) : (
-            <ButtonInitialNewCycle disabled={isSubmitDisabled}>
-              Começar
-            </ButtonInitialNewCycle>
-          )}
+          <Buttons isSubmitDisabled={isSubmitDisabled} />
+          <div className="flex gap-2 justify-center">
+            <p className="text-gray-500 font-bold">#{quantityCiclesFocus}</p>
+            <p>Time to focus!</p>
+          </div>
         </form>
       </div>
     </>

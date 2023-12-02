@@ -27,34 +27,38 @@ export function NewCycleForm() {
   const { register } = useFormContext();
 
   return (
-    <div>
-      <TaskLabel htmlFor="task">Vou trabalhar em</TaskLabel>
-      <TaskInput
-        type="text"
-        id="task"
-        list="task-suggestions"
-        disabled={!!activeCycle}
-        {...register("task")}
-        min={1}
-      />
+    <div className="flex gap-8 flex-wrap items-center">
+      <div>
+        <TaskLabel htmlFor="task">Vou trabalhar em</TaskLabel>
+        <TaskInput
+          type="text"
+          id="task"
+          list="task-suggestions"
+          disabled={!!activeCycle}
+          {...register("task")}
+          min={1}
+        />
 
-      <datalist id="task-suggestions">
-        <option value="Projeto 1" />
-        <option value="Projeto 2" />
-        <option value="Projeto 3" />
-        <option value="Projeto 4" />
-      </datalist>
+        <datalist id="task-suggestions">
+          <option value="Projeto 1" />
+          <option value="Projeto 2" />
+          <option value="Projeto 3" />
+          <option value="Projeto 4" />
+        </datalist>
+      </div>
 
-      <TaskLabel htmlFor="minutesAmount">Durante</TaskLabel>
-      <TaskInput
-        type="number"
-        id="minutesAmount"
-        disabled={!!activeCycle}
-        {...register("minutesAmount", { valueAsNumber: true })}
-        min={1}
-        max={60}
-      />
-      <TaskLabel>minutos.</TaskLabel>
+      <div>
+        <TaskLabel htmlFor="minutesAmount">Durante</TaskLabel>
+        <TaskInput
+          type="number"
+          id="minutesAmount"
+          disabled={!!activeCycle}
+          {...register("minutesAmount", { valueAsNumber: true })}
+          min={1}
+          max={60}
+        />
+        <TaskLabel>minutos.</TaskLabel>
+      </div>
     </div>
   );
 }

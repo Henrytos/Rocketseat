@@ -1,4 +1,3 @@
-import { daysToWeeks } from "date-fns";
 import { Cycle } from "../../contexts/CyclesContexts";
 import { CycleActionTypes } from "./actions";
 import { produce } from "immer";
@@ -12,7 +11,7 @@ export function cyclesReducer(state: CyclesState, action: any) {
   switch (action.type) {
     case CycleActionTypes.ADD_NEW_CYCLE:
       return produce(state, (draft) => {
-        draft.cycles.push(action.payload.newCycle);
+        draft.cycles.unshift(action.payload.newCycle);
         draft.activeCycleId = action.payload.newCycle.id;
       });
 
