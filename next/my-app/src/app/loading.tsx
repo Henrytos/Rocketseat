@@ -1,3 +1,3 @@
 export default function loading() {
-  return <p>carregando</p>;
+  return <p>carregando home </p>;
 }
