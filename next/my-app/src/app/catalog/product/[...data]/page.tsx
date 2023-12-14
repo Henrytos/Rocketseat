@@ -1,25 +1,25 @@
-"use client";
+import { AddToCart } from "./add-to-cart";
+
 interface ProductDetailsProps {
   params: {
     data: string[];
   };
+  children: React.ReactNode;
 }
 
-export default function productDetails(props: ProductDetailsProps) {
-  const [id, color, quantity] = props.params.data;
+export default async function (props: ProductDetailsProps) {
+  const [id, color, priece] = props.params.data;
 
-  console.log("add in cart");
+  const data = await fetch("https://api.github.com/users/henrytos");
+  const response = await data.json();
 
-  function addInCart() {
-    console.log("add in cart");
-  }
   return (
     <main>
       <h1>productDetails</h1>
       <p>id: {id}</p>
       <p>color: {color}</p>
-      <p>quantity: {quantity}</p>
-      <button onClick={addInCart}>add cart</button>
+      <p>priece: {priece}</p>
+      <AddToCart />
     </main>
   );
 }
