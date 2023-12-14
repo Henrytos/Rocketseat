@@ -1,3 +1,4 @@
+import { Test } from "./Test";
 import { AddToCart } from "./add-to-cart";
 
 interface ProductDetailsProps {
@@ -19,7 +20,9 @@ export default async function (props: ProductDetailsProps) {
       <p>id: {id}</p>
       <p>color: {color}</p>
       <p>priece: {priece}</p>
-      <AddToCart />
+      <AddToCart>
+        <Test />
+      </AddToCart>
     </main>
   );
 }
