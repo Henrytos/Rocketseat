@@ -3,9 +3,11 @@
 import { CatalogContext, Coffee } from "@/contexts/CatolofContext";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, Suspense } from "react";
 
 function CardCoffe({ coffe }: { coffe: Coffee }) {
+  const { incrementQuantity, decrementQuantity, addToCart } =
+    useContext(CatalogContext);
   return (
     <div
       key={coffe.imgSrc}
@@ -30,20 +32,31 @@ function CardCoffe({ coffe }: { coffe: Coffee }) {
         ))}
       </div>
       <h3 className="text-xl font-bold mb-2">{coffe.name}</h3>
-      <p className="text-base-label text-sm text-center mb-8">
-        {coffe.description}
-      </p>
+      <p className="text-base-label text-sm text-center mb-8">{coffe.imgSrc}</p>
       <div className="flex w-full justify-between items-center">
         <div className="flex items-center gap-1">
           <p className="text-base-text text-sm">R$</p>
           <p className="text-base-text text-lg font-black">{coffe.price}</p>
         </div>
         <div className="flex items-center bg-base-button gap-3 p-2 rounded">
-          <Minus size={14} color="#4B2995" className="cursor-pointer" />
+          <Minus
+            size={14}
+            color="#4B2995"
+            className="cursor-pointer"
+            onClick={() => decrementQuantity(coffe.id)}
+          />
           <span>{coffe.quantity}</span>
-          <Plus size={14} color="#4B2995" className="cursor-pointer" />
+          <Plus
+            size={14}
+            color="#4B2995"
+            className="cursor-pointer"
+            onClick={() => incrementQuantity(coffe.id)}
+          />
         </div>
-        <div className="bg-purple-dark text-white p-2">
+        <div
+          className="bg-purple-dark text-white p-2 rounded cursor-pointer"
+          onClick={() => addToCart(coffe.id)}
+        >
           <ShoppingCart />
         </div>
       </div>
@@ -54,10 +67,12 @@ function CardCoffe({ coffe }: { coffe: Coffee }) {
 export function CatalogCoffe() {
   const { coffees } = useContext(CatalogContext);
   return (
-    <div className="grid grid-cols-4 gap-x-8 gap-y-10">
-      {coffees.map((coffe) => (
-        <CardCoffe coffe={coffe} key={coffe.description} />
-      ))}
-    </div>
+    <Suspense fallback={"Carregando..."}>
+      <div className="grid grid-cols-4 gap-x-8 gap-y-10">
+        {coffees.map((coffe) => (
+          <CardCoffe coffe={coffe} key={coffe.description} />
+        ))}
+      </div>
+    </Suspense>
   );
 }
