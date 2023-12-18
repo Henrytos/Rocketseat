@@ -15,9 +15,11 @@ export interface Coffee {
 
 type CatalogContextType = {
   coffees: Coffee[];
+  coffeesInCart: Coffee[];
   incrementQuantity: (targetCoffeId: number) => void;
   decrementQuantity: (targetCoffeId: number) => void;
   addToCart: (targetCoffeId: number) => void;
+  removeToCart: (targetCoffeId: number) => void;
 };
 
 export const CatalogContext = createContext({} as CatalogContextType);
@@ -154,6 +156,8 @@ export function CatalogContextProvider({ children }: { children: ReactNode }) {
     return initialState;
   });
 
+  const coffeesInCart = coffees.filter((coffe) => coffe.isInCart);
+
   function incrementQuantity(targetCoffeId: number) {
     dispatch({ type: "INCREMENT_QUANTITY", payload: { targetCoffeId } });
   }
@@ -165,6 +169,10 @@ export function CatalogContextProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "ADD_TO_CART", payload: { targetCoffeId } });
   }
 
+  function removeToCart(targetCoffeId: number) {
+    dispatch({ type: "REMOVE_FROM_CART", payload: { targetCoffeId } });
+  }
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const coffeesJSON = JSON.stringify(coffees);
@@ -174,7 +182,14 @@ export function CatalogContextProvider({ children }: { children: ReactNode }) {
 
   return (
     <CatalogContext.Provider
-      value={{ coffees, incrementQuantity, decrementQuantity, addToCart }}
+      value={{
+        coffees,
+        coffeesInCart,
+        incrementQuantity,
+        decrementQuantity,
+        addToCart,
+        removeToCart,
+      }}
     >
       {children}
     </CatalogContext.Provider>

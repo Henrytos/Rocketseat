@@ -1,8 +1,11 @@
+"use client";
+
 import { MapPin, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export function Header() {
+  const { coffeesInCart } = useContext(CatalogContext);
   return (
     <header className="flex  max-w-6xl m-auto h-24 items-center justify-between bg-background">
       <Link href="/home">
