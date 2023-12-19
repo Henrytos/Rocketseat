@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 export function LinkToCart() {
   const { coffees } = useContext(CatalogContext);
-  console.log(coffees);
+
   return (
     <Link
       href="/cart"
@@ -17,7 +17,6 @@ export function LinkToCart() {
       <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-yellow-dark text-white rounded-full px-2">
         {coffees.filter((c) => c.isInCart).length}
       </span>
-      )
     </Link>
   );
 }

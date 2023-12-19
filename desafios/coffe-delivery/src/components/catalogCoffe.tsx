@@ -70,7 +70,7 @@ export function CatalogCoffe() {
     <Suspense fallback={"Carregando..."}>
       <div className="grid grid-cols-4 gap-x-8 gap-y-10">
         {coffees.map((coffe) => (
-          <CardCoffe coffe={coffe} key={coffe.description} />
+          <CardCoffe coffe={coffe} key={coffe.id} />
         ))}
       </div>
     </Suspense>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
+import { CatalogContextProvider } from "@/contexts/CatolofContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({
@@ -21,11 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <div className="w-screen bg-background">
-          <Header />
-          {children}
-        </div>
+      <body className="relative">
+        <CatalogContextProvider>
+          <div className="w-screen bg-background">
+            <Header />
+            {children}
+          </div>
+        </CatalogContextProvider>
       </body>
     </html>
   );

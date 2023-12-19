@@ -1,5 +1,4 @@
 import { CoffesSelect } from "@/components/coffesSelect";
-import { CatalogContextProvider } from "@/contexts/CatolofContext";
 
 export default function CartPage() {
   return (
@@ -13,9 +12,7 @@ export default function CartPage() {
         <h2 className="block text-base-subtitle font-bold text-lg">
           Cafés selecionados
         </h2>
-        <CatalogContextProvider>
-          <CoffesSelect />
-        </CatalogContextProvider>
+        <CoffesSelect />
       </section>
     </main>
   );
