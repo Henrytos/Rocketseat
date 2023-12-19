@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "server": "json-server server.json -p 3333 -w -d 500",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@radix-ui/themes": "^2.0.1",
+    "json-server": "^0.17.4",
     "lucide": "^0.294.0",
     "radix-themes-tw": "^0.0.8",
     "react": "^18.2.0",
