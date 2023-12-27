@@ -1,12 +1,12 @@
-import { Header } from "../components/Header";
+import { Header } from '../components/Header'
 
-import { useContext } from "react";
-import { TransactionContext } from "../contexts/TransactionsContext";
-import { SearchTransaction } from "./components/SearchTransaction";
-import { RowTransaction } from "./components/RowTransaction";
+import { useContext } from 'react'
+import { TransactionContext } from '../contexts/TransactionsContext'
+import { SearchTransaction } from './components/SearchTransaction'
+import { RowTransaction } from './components/RowTransaction'
 
 export function Home() {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions } = useContext(TransactionContext)
 
   return (
     <>
@@ -24,5 +24,5 @@ export function Home() {
         </main>
       </main>
     </>
-  );
+  )
 }

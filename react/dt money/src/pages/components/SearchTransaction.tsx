@@ -1,14 +1,16 @@
-import search from "../../assets/imgs/search.png";
-import { useForm } from "react-hook-form";
-import * as zod from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import search from '../../assets/imgs/search.png'
+import { useForm } from 'react-hook-form'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext } from 'react'
+import { TransactionContext } from '../../contexts/TransactionsContext'
 
 export function SearchTransaction() {
   const searchFormSchema = zod.object({
     query: zod.string(),
-  });
+  })
 
-  type SearchFormInputs = zod.infer<typeof searchFormSchema>;
+  type SearchFormInputs = zod.infer<typeof searchFormSchema>
 
   const {
     register,
@@ -16,11 +18,12 @@ export function SearchTransaction() {
     formState: { isSubmitting },
   } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchFormSchema),
-  });
+  })
+
+  const { fetchTranactions } = useContext(TransactionContext)
 
   async function handleSearchTransaction(data: SearchFormInputs) {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(data);
+    fetchTranactions(data.query)
   }
   return (
     <form
@@ -32,7 +35,7 @@ export function SearchTransaction() {
         type="text"
         className="grow bg-gray-900 rounded py-3 px-4 outline-none text-gray-500 "
         placeholder="Busque uma transação"
-        {...register("query")}
+        {...register('query')}
       />
       <button
         type="submit"
@@ -46,5 +49,5 @@ export function SearchTransaction() {
         <span>Buscar</span>
       </button>
     </form>
-  );
+  )
 }

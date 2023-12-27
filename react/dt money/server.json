@@ -15,6 +15,14 @@
       "category": "Alimentação",
       "price": 50,
       "createdAt": "2022-07-29T19:30:44.505Z"
+    },
+    {
+      "category": "sff",
+      "description": "aresr",
+      "price": 213,
+      "type": "outcome",
+      "createdAt": "2023-12-27T22:13:21.094Z",
+      "id": 3
     }
   ]
 }

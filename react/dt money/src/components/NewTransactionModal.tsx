@@ -1,35 +1,39 @@
-import { Controller, useForm } from "react-hook-form";
-import * as zod from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Dialog } from "@radix-ui/themes";
+import { Controller, useForm } from 'react-hook-form'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Button, Dialog } from '@radix-ui/themes'
+import { useContext } from 'react'
+import { TransactionContext } from '../contexts/TransactionsContext'
 
 export function NewTransactionModal() {
+  const { createNewTransaction } = useContext(TransactionContext)
+
   const newTransactionFormSchema = zod.object({
     description: zod.string(),
     price: zod.number().min(0),
     category: zod.string(),
-    type: zod.enum(["income", "outcome"]),
-  });
-  type newTransactionFormInputs = zod.infer<typeof newTransactionFormSchema>;
+    type: zod.enum(['income', 'outcome']),
+  })
+  type newTransactionFormInputs = zod.infer<typeof newTransactionFormSchema>
 
   const { register, handleSubmit, reset, control } =
     useForm<newTransactionFormInputs>({
       resolver: zodResolver(newTransactionFormSchema),
       defaultValues: {
-        type: "income",
-        category: "",
-        description: "",
+        type: 'income',
+        category: '',
+        description: '',
         price: 0,
       },
-    });
+    })
 
   function handleNewTransactionModal(data: newTransactionFormInputs) {
-    console.log(data);
-    reset();
+    createNewTransaction(data)
+    reset()
   }
 
   const InputStyle =
-    "    bg-gray-900 rounded py-3 px-4 outline-none text-gray-500 w-full  placeholder:text-gray-500";
+    '    bg-gray-900 rounded py-3 px-4 outline-none text-gray-500 w-full  placeholder:text-gray-500'
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -56,21 +60,21 @@ export function NewTransactionModal() {
             className={InputStyle}
             type="text"
             placeholder="Descrição"
-            {...register("description")}
+            {...register('description')}
             required
           />
           <input
             className={InputStyle}
             type="text"
             placeholder="Preço"
-            {...register("price", { valueAsNumber: true })}
+            {...register('price', { valueAsNumber: true })}
             required
           />
           <input
             className={InputStyle}
             type="text"
             placeholder="Categoria"
-            {...register("category")}
+            {...register('category')}
             required
           />
 
@@ -78,13 +82,13 @@ export function NewTransactionModal() {
             control={control}
             name="type"
             render={({ field }) => {
-              console.log(field);
+              console.log(field)
               return (
                 <select {...field} className={InputStyle}>
                   <option value="income">Entrada</option>
                   <option value="outcome">Saída</option>
                 </select>
-              );
+              )
             }}
           />
 
@@ -99,5 +103,5 @@ export function NewTransactionModal() {
         </form>
       </Dialog.Content>
     </Dialog.Root>
-  );
+  )
 }

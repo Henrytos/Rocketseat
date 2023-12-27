@@ -1,6 +1,6 @@
-import logo from "../assets/imgs/logo.png";
-import { NewTransactionModal } from "./NewTransactionModal";
-import { Summary } from "./Summary";
+import logo from '../assets/imgs/logo.png'
+import { NewTransactionModal } from './NewTransactionModal'
+import { Summary } from './Summary'
 
 export function Header() {
   return (
@@ -14,5 +14,5 @@ export function Header() {
       </nav>
       <Summary />
     </header>
-  );
+  )
 }

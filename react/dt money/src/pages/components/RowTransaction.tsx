@@ -9,7 +9,7 @@ export function RowTransaction({ transaction }: { transaction: Transaction }) {
       </td>
       <td
         className={`${
-          transaction.type == "income" ? "text-green-300" : "text-red-400"
+          transaction.type === "income" ? "text-green-300" : "text-red-400"
         }`}
       >
         {formaterCurrency.format(transaction.price)}

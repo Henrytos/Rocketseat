@@ -1,9 +1,9 @@
-import money from "../assets/imgs/money.png";
-import down from "../assets/imgs/down.png";
-import up from "../assets/imgs/up.png";
-import { ReactNode } from "react";
-import { formaterCurrency } from "../utils/formater";
-import { useSummary } from "../hooks/useSummary";
+import money from '../assets/imgs/money.png'
+import down from '../assets/imgs/down.png'
+import up from '../assets/imgs/up.png'
+import { ReactNode } from 'react'
+import { formaterCurrency } from '../utils/formater'
+import { useSummary } from '../hooks/useSummary'
 
 function SumaryContainer({ ...props }) {
   return (
@@ -11,11 +11,11 @@ function SumaryContainer({ ...props }) {
       className="grid grid-cols-3 max-w-6xl m-auto gap-8 translate-y-1/2 "
       {...props}
     />
-  );
+  )
 }
 interface CardSumaryProps {
-  className?: string;
-  children: ReactNode;
+  className?: string
+  children: ReactNode
 }
 
 function CardSumary({ className, children }: CardSumaryProps) {
@@ -25,7 +25,7 @@ function CardSumary({ className, children }: CardSumaryProps) {
     >
       {children}
     </div>
-  );
+  )
 }
 
 function TypeCardSumary({ children }: { children: ReactNode }) {
@@ -34,20 +34,20 @@ function TypeCardSumary({ children }: { children: ReactNode }) {
       <span className="text-gray-300">entradas</span>
       {children}
     </div>
-  );
+  )
 }
 
 function PriceTransaction({ price }: { price: number }) {
   return (
     <span className="font-bold text-3xl text-gray-100">
-      {" "}
+      {' '}
       {formaterCurrency.format(price)}
     </span>
-  );
+  )
 }
 
 export function Summary() {
-  const summary = useSummary();
+  const summary = useSummary()
 
   return (
     <SumaryContainer>
@@ -72,5 +72,5 @@ export function Summary() {
         <PriceTransaction price={summary.total} />
       </CardSumary>
     </SumaryContainer>
-  );
+  )
 }
