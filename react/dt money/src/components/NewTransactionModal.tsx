@@ -1,51 +1,35 @@
+import { Controller, useForm } from "react-hook-form";
+import * as zod from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Dialog } from "@radix-ui/themes";
-import { InputHTMLAttributes } from "react";
-
-function InputNewTransaction({
-  ...props
-}: InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <input
-      {...props}
-      className="bg-gray-900 rounded py-3 px-4 outline-none text-gray-500 w-full  placeholder:text-gray-500"
-    />
-  );
-}
-
-function SwitchTypeTransaction() {
-  return (
-    <div className="grid grid-cols-2 gap-4">
-      <label
-        htmlFor="inputTransaction"
-        className="flex py-4 justify-center  bg-gray-600 rounded "
-      >
-        <span className="text-gray-300">Entrada</span>
-        <input
-          type="radio"
-          name="typeTransaction"
-          id="inputTransaction"
-          value="inputTransaction"
-          className="absolute invisible"
-        />
-      </label>
-      <label
-        htmlFor="outputTransaction"
-        className="flex py-4 justify-center bg-gray-600 rounded   "
-      >
-        <span className="text-gray-300">saida</span>
-        <input
-          type="radio"
-          name="typeTransaction"
-          id="outputTransaction"
-          value="outputTransaction"
-          className="absolute invisible"
-        />
-      </label>
-    </div>
-  );
-}
 
 export function NewTransactionModal() {
+  const newTransactionFormSchema = zod.object({
+    description: zod.string(),
+    price: zod.number().min(0),
+    category: zod.string(),
+    type: zod.enum(["income", "outcome"]),
+  });
+  type newTransactionFormInputs = zod.infer<typeof newTransactionFormSchema>;
+
+  const { register, handleSubmit, reset, control } =
+    useForm<newTransactionFormInputs>({
+      resolver: zodResolver(newTransactionFormSchema),
+      defaultValues: {
+        type: "income",
+        category: "",
+        description: "",
+        price: 0,
+      },
+    });
+
+  function handleNewTransactionModal(data: newTransactionFormInputs) {
+    console.log(data);
+    reset();
+  }
+
+  const InputStyle =
+    "    bg-gray-900 rounded py-3 px-4 outline-none text-gray-500 w-full  placeholder:text-gray-500";
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -63,26 +47,47 @@ export function NewTransactionModal() {
         </Dialog.Close>
 
         <h2 className="text-white font-bold text-2xl pb-8">Nova transação</h2>
-        <form action="" className="flex flex-col gap-4">
-          <InputNewTransaction
+        <form
+          action=""
+          className="flex flex-col gap-4"
+          onSubmit={handleSubmit(handleNewTransactionModal)}
+        >
+          <input
+            className={InputStyle}
             type="text"
-            name="description"
-            id="description"
             placeholder="Descrição"
+            {...register("description")}
+            required
           />
-          <InputNewTransaction
+          <input
+            className={InputStyle}
             type="text"
-            name="priece"
-            id="priece"
             placeholder="Preço"
+            {...register("price", { valueAsNumber: true })}
+            required
           />
-          <InputNewTransaction
+          <input
+            className={InputStyle}
             type="text"
-            name="category"
-            id="category"
-            placeholder="Descrição"
+            placeholder="Categoria"
+            {...register("category")}
+            required
           />
-          <SwitchTypeTransaction />
+
+          <Controller
+            control={control}
+            name="type"
+            render={({ field }) => {
+              console.log(field);
+              return (
+                <select {...field} className={InputStyle}>
+                  <option value="income">Entrada</option>
+                  <option value="outcome">Saída</option>
+                </select>
+              );
+            }}
+          />
+
           <Dialog.Close>
             <Button
               className="w-full bg-green-500  py-7 rounded cursor-pointer"
