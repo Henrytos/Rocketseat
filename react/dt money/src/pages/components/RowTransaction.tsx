@@ -1,5 +1,5 @@
-import { Transaction } from "../../contexts/TransactionsContext";
-import { formaterCurrency, formaterDate } from "../../utils/formater";
+import { Transaction } from '../../contexts/TransactionsContext'
+import { formaterCurrency, formaterDate } from '../../utils/formater'
 
 export function RowTransaction({ transaction }: { transaction: Transaction }) {
   return (
@@ -9,7 +9,7 @@ export function RowTransaction({ transaction }: { transaction: Transaction }) {
       </td>
       <td
         className={`${
-          transaction.type === "income" ? "text-green-300" : "text-red-400"
+          transaction.type === 'income' ? 'text-green-300' : 'text-red-400'
         }`}
       >
         {formaterCurrency.format(transaction.price)}
@@ -17,5 +17,5 @@ export function RowTransaction({ transaction }: { transaction: Transaction }) {
       <td>{transaction.type}</td>
       <td>{formaterDate.format(new Date(transaction.createdAt))}</td>
     </tr>
-  );
+  )
 }
