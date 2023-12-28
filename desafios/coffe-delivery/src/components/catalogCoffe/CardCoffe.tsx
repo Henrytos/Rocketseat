@@ -1,12 +1,11 @@
 "use client";
 
 import { CatalogContext, Coffee } from "@/contexts/CatolofContext";
-
 import { Check, Minus, Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import { useContext, Suspense } from "react";
+import { useContext } from "react";
 
-function CardCoffe({ coffe }: { coffe: Coffee }) {
+export function CardCoffe({ coffe }: { coffe: Coffee }) {
   const { incrementQuantity, decrementQuantity, addToCart } =
     useContext(CatalogContext);
   return (
@@ -75,18 +74,5 @@ function CardCoffe({ coffe }: { coffe: Coffee }) {
         </div>
       </div>
     </>
-  );
-}
-
-export function CatalogCoffe() {
-  const { coffees } = useContext(CatalogContext);
-  return (
-    <Suspense fallback={"Carregando..."}>
-      <div className="grid grid-cols-4 gap-x-8 gap-y-10">
-        {coffees.map((coffe) => (
-          <CardCoffe coffe={coffe} key={coffe.id} />
-        ))}
-      </div>
-    </Suspense>
   );
 }
