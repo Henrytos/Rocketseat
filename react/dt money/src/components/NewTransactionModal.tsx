@@ -2,11 +2,16 @@ import { Controller, useForm } from 'react-hook-form'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Dialog } from '@radix-ui/themes'
-import { useContext } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { TransactionContext } from '../contexts/TransactionsContext'
 
 export function NewTransactionModal() {
-  const { createNewTransaction } = useContext(TransactionContext)
+  const createNewTransaction = useContextSelector(
+    TransactionContext,
+    (context) => {
+      return context.createNewTransaction
+    },
+  )
 
   const newTransactionFormSchema = zod.object({
     description: zod.string(),
