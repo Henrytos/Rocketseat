@@ -49,6 +49,7 @@ export function SearchTransaction() {
       >
         <img src={search} alt="buscar" className="inline pr-1" />
         <span>Buscar</span>
+        <span>hellowolrd</span>
       </button>
     </form>
   )
