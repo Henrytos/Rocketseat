@@ -24,9 +24,14 @@
     --input: 0 0% 89.8%;
     --ring: 0 72.2% 50.6%;
     --radius: 0.5rem;
+    /*my colors*/
+    --warning: 38 92% 50%;
+    --warning-foreground: 48 96% 89%;
   }
 
   .dark {
+    --warning: 48 96% 89%;
+    --warning-foreground: 38 92% 50%;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -46,6 +51,9 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 72.2% 50.6%;
+    /*my colors*/
+    --warning: 48 96% 89%;
+    --warning-foreground: 38 92% 50%;
   }
 }
 
