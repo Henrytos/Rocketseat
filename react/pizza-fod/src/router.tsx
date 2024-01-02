@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "./pages/layouts/app";
 import { Dashboard } from "./pages/app/Dashboard";
-import { SingIn } from "./pages/auth/SingIn";
+import { SingIn } from "./pages/auth/sing-in";
 import { AuthLayout } from "./pages/layouts/auth";
+import { SingUp } from "./pages/auth/sing-up";
 
 export const router = createBrowserRouter([
   {
@@ -11,8 +12,11 @@ export const router = createBrowserRouter([
     children: [{ index: true, path: "/", element: <Dashboard /> }],
   },
   {
-    path: "/sing-in",
+    path: "/",
     element: <AuthLayout />,
-    children: [{ index: true, path: "/sing-in", element: <SingIn /> }],
+    children: [
+      { path: "/sing-in", element: <SingIn /> },
+      { path: "/sing-up", element: <SingUp /> },
+    ],
   },
 ]);
