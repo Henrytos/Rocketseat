@@ -4,6 +4,8 @@ import { NavLink } from "./nav-link";
 import { GoHome } from "react-icons/go";
 import { TbToolsKitchen3 } from "react-icons/tb";
 import { LuPizza } from "react-icons/lu";
+import { ThemeTogle } from "@/theme/theme-togle";
+import { AccountMenu } from "./Account-menu";
 
 export function Header() {
   return (
@@ -22,6 +24,10 @@ export function Header() {
           pedidos
         </NavLink>
       </nav>
+      <div className="ml-auto flex items-center gap-2">
+        <ThemeTogle />
+        <AccountMenu />
+      </div>
     </header>
   );
 }
