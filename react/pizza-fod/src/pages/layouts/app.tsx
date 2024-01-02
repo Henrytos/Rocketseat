@@ -1,10 +1,13 @@
+import { Header } from "@/components/header";
 import { Outlet } from "react-router-dom";
 
 export function AppLayout() {
   return (
     <main>
-      <h1>cabeçalho</h1>
-      <Outlet />
+      <Header />
+      <section className="">
+        <Outlet />
+      </section>
     </main>
   );
 }
