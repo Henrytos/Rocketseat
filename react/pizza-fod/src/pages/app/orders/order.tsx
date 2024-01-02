@@ -2,6 +2,7 @@ import { Table, TableBody, TableHead } from "@/components/ui/table";
 import { Helmet } from "react-helmet-async";
 import { OrderTableRow } from "./order-table-row";
 import { OrderFilter } from "./order-table-filter";
+import { Pagination } from "@/components/pagination";
 
 export function Orders() {
   return (
@@ -25,6 +26,7 @@ export function Orders() {
             ))}
           </TableBody>
         </Table>
+        <Pagination pageIndex={0} perPage={10} totalCount={105} />
       </div>
     </>
   );
