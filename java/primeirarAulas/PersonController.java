@@ -1,3 +1,5 @@
+package primeirarAulas;
+
 public class PersonController {
   private String name;
   private int age;
@@ -6,7 +8,6 @@ public class PersonController {
     this.name = name;
     this.age = age;
   }
-
 
   public String getName() {
     return this.name;
@@ -25,6 +26,6 @@ public class PersonController {
   }
 
   public void showPerson() {
-     System.out.println("olá seu nome é "+getName()+" voce tem "+getAge()+" anos");
+    System.out.println("olá seu nome é " + getName() + " voce tem " + getAge() + " anos");
   }
 }

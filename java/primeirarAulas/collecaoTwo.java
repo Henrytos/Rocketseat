@@ -1,3 +1,5 @@
+package primeirarAulas;
+
 import java.util.HashSet;
 
 public class collecaoTwo {

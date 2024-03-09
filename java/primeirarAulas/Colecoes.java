@@ -1,3 +1,5 @@
+package primeirarAulas;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +13,7 @@ public class Colecoes {
     notes.put("mari", 8);
     notes.put("ana", 9);
 
-
-    for (Map.Entry<String,Integer> entry : notes.entrySet() ) {
+    for (Map.Entry<String, Integer> entry : notes.entrySet()) {
       String key = entry.getKey();
       Integer value = entry.getValue();
       System.out.println(key + " : " + value);
@@ -20,5 +21,5 @@ public class Colecoes {
     System.out.println(notes);
 
   }
-  
+
 }
