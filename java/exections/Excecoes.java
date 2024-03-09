@@ -6,6 +6,12 @@ public class Excecoes {
    * checked exepctions :As exceções verificadas são aquelas que o compilador
    * exige que sejam tratadas.
    */
+
+  /*
+   * Checked Exceptions são verificadas em tempo de compilação, enquanto Unchecked
+   * Exceptions são verificadas em tempo de execução.
+   * 
+   */
   /*
    * unchecked exepctions :As exceções não verificadas são aquelas que o
    * compilador não consegue prever no momento da compilação.
