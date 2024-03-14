@@ -8,7 +8,7 @@ import com.henryfranz.gestao_de_vagas.modules.company.entities.CompanyEntity;
 import com.henryfranz.gestao_de_vagas.modules.company.repositories.CompanyRepository;
 
 @Service
-public class CreationCompanyUseCase {
+public class CreateCompanyUseCase {
 
   @Autowired
   private CompanyRepository companyRepository;
