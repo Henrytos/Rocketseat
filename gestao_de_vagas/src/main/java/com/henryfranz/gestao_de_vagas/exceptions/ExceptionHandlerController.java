@@ -32,6 +32,7 @@ public class ExceptionHandlerController {
     List<ErrorMenssgeDTO> dto = new ArrayList<>();
 
     e.getBindingResult().getFieldErrors().forEach(err -> {
+      @SuppressWarnings("null")
       String message = messageSource.getMessage(err, LocaleContextHolder.getLocale());
 
       ErrorMenssgeDTO error = new ErrorMenssgeDTO(message, err.getField());
