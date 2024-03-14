@@ -11,6 +11,8 @@ import com.henryfranz.gestao_de_vagas.exceptions.UserFoundException;
 import com.henryfranz.gestao_de_vagas.modules.company.entities.CompanyEntity;
 import com.henryfranz.gestao_de_vagas.modules.company.useCases.CreateCompanyUseCase;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/company")
 public class CompanyController {
@@ -19,7 +21,7 @@ public class CompanyController {
   private CreateCompanyUseCase createCompanyUseCase;
 
   @PostMapping("/")
-  public ResponseEntity<Object> create(@RequestBody CompanyEntity companyEntity) {
+  public ResponseEntity<Object> create(@Valid @RequestBody CompanyEntity companyEntity) {
     try {
       var result = this.createCompanyUseCase.execute(companyEntity);
       return ResponseEntity.ok().body(result);
