@@ -27,7 +27,7 @@ public class CandidateController {
   @Autowired
   ReadCandidatesUseCase readCandidatesUseCase;
 
-  @PostMapping("")
+  @PostMapping("/")
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
     try {
       CandidateEntity newCandidate = this.creationCandidateUseCase.execute(candidateEntity);
@@ -38,7 +38,7 @@ public class CandidateController {
     }
   }
 
-  @GetMapping("")
+  @GetMapping("/")
   public ResponseEntity<List<CandidateEntity>> index() {
     List<CandidateEntity> candidates = this.readCandidatesUseCase.execute();
     return ResponseEntity.ok().body(candidates);
