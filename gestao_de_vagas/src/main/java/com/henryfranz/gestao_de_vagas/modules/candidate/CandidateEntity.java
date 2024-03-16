@@ -23,15 +23,18 @@ public class CandidateEntity {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
+  @NotNull
   @Pattern(regexp = "^(?!\\s*$).+", message = "o campo [userName] não pode ser vazio")
   private String username;
 
-  @Email(message = "o campo[email] deve conter um email vilido")
   @NotNull
+  @Email(message = "o campo[email] deve conter um email vilido")
   private String email;
 
-  @Length(min = 10, max = 100)
+  @NotNull()
+  @Length(min = 10, max = 100, message = "o campo [password] não pode ser vazio")
   private String password;
+
   private String description;
   private String curriculum;
 
