@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.henryfranz.gestao_de_vagas.exceptions.UserFoundException;
 import com.henryfranz.gestao_de_vagas.modules.company.entities.CompanyEntity;
 import com.henryfranz.gestao_de_vagas.modules.company.useCases.CreateCompanyUseCase;
+import com.henryfranz.gestao_de_vagas.modules.company.useCases.FindAllCompanyUseCase;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/company")
@@ -19,6 +21,9 @@ public class CompanyController {
 
   @Autowired
   private CreateCompanyUseCase createCompanyUseCase;
+
+  @Autowired
+  private FindAllCompanyUseCase findAllCompanyUseCase;
 
   @PostMapping("/")
   public ResponseEntity<Object> create(@Valid @RequestBody CompanyEntity companyEntity) {
@@ -31,4 +36,15 @@ public class CompanyController {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
   }
+
+  @GetMapping("/")
+  public ResponseEntity<Object> allCompanys() {
+    try {
+      var result = findAllCompanyUseCase.execute();
+      return ResponseEntity.ok().body(result);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+  }
+
 }
