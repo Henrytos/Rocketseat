@@ -67,3 +67,53 @@ SELECT a.userId, a.username, b.state, b.city, b.road FROM users AS a INNER JOIN 
 SELECT a.userId,a.username ,b.state,b.city,b.road from users as a  RIGHT JOIN address as b on a.addressId = b.addressId;
 
 SELECT a.userId , a.username, b.road FROM users as a  LEFT JOIN address as b on a.addressId = b.addressId ;
+
+
+SELECT * FROM products;
+SELECT * FROM sellers;
+SELECT * FROM sales;
+
+INSERT INTO sales(seller,client,product,quantity_sold) VALUES (1,1,2,5);
+
+
+//PROCEDURE
+CREATE OR REPLACE FUNCTION up_storage() RETURNS TRIGGER
+AS 
+
+$$
+DECLARE
+	quant_storage INTEGER;
+
+BEGIN
+	SELECT quantity_available from products where id_product = NEW.product into quant_storage;
+	IF quant_storage < NEW.quantity_sold THEN
+		raise exception 'Quantidade não disponível no estoque';
+	else 
+		update products set quantity_available = quantity_available - NEW.quantity_sold
+			where id_product = NEW.product;
+	END IF;
+	RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+//TRIGGER
+CREATE TRIGGER trig_up_storage
+BEFORE INSERT ON sales
+FOR EACH ROW
+EXECUTE PROCEDURE up_storage();
+
+//SEQUENCES
+CREATE SEQUENCE IF NOT EXISTS code_gen_seq
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 9999999999
+	START 10000
+	CACHE 1;
+	
+ALTER TABLE products ADD COLUMN code INTEGER;
+
+ALTER TABLE products ALTER code SET DEFAULT NEXTVAL('code_gen_seq');
+
+INSERT INTO products (prod_name, category, description, quantity_available, price) 
+VALUES ('monitor', 'eletrônicos', 'monitor 25 polegadas da marca x', 300, 1200)
+
