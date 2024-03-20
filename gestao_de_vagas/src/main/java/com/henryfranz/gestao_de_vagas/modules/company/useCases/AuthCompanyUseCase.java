@@ -29,6 +29,7 @@ public class AuthCompanyUseCase {
   private PasswordEncoder passwordEncoder;
 
   public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+    System.out.println(authCompanyDTO);
     // se não existir lançe exceção
     var company = companyRepository.findByUsername(authCompanyDTO.getUsername()).orElseThrow(() -> {
       throw new UsernameNotFoundException("companyDTO does not exist");
@@ -44,7 +45,7 @@ public class AuthCompanyUseCase {
     // criaçaõ do token
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
     var token = JWT.create().withIssuer("javagas").withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
-        .withSubject(authCompanyDTO.getPassword().toString()).sign(algorithm);
+        .withSubject(company.getId().toString()).sign(algorithm);
 
     return token;
   }

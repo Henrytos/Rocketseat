@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig {
 
   @Autowired
-  private SecurityFiilter securityFiilter;
+  private SecurityFilter securityFiilter;
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

@@ -23,8 +23,10 @@ public class AuthCompanyController {
   public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) throws Exception {
     try {
       var token = this.authCompanyUseCase.execute(authCompanyDTO);
+
       return ResponseEntity.ok().body(token);
     } catch (Exception e) {
+
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
   }
