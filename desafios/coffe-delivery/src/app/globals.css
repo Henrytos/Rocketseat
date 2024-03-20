@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#home-initial {
+  height: 544px;
+  background-image: url("/imgs/Background.png");
+}
