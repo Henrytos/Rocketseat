@@ -38,7 +38,10 @@ public class CandidateEntity {
   @Length(min = 10, max = 100, message = "o campo [password] não pode ser vazio")
   private String password;
 
+  @NotNull
   private String description;
+
+  @NotNull
   private String curriculum;
 
   @CreationTimestamp
