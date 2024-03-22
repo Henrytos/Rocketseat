@@ -28,6 +28,9 @@ public class CandidateEntity {
   private String username;
 
   @NotNull
+  private String name;
+
+  @NotNull
   @Email(message = "o campo[email] deve conter um email vilido")
   private String email;
 
