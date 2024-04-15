@@ -51,7 +51,7 @@ export function RepositoryPage() {
           </div>
         </div>
       </Card>
-      <main className="absolute top-24 px-8 py-10">
+      <main className="absolute top-24 px-8 py-10 space-y-6">
         <Text>
           Programming languages all have built-in data structures, but these
           often differ from one language to another. This article attempts to
@@ -60,30 +60,6 @@ export function RepositoryPage() {
           structures. Wherever possible, comparisons with other languages are
           drawn.
         </Text>
-        <Text>
-          JavaScript is a loosely typed and dynamic language. Variables in
-          JavaScript are not directly associated with any particular value type,
-          and any variable can be assigned (and re-assigned) values of all
-          types:
-        </Text>
-        <Text>
-          JavaScript is a loosely typed and dynamic language. Variables in
-          JavaScript are not directly associated with any particular value type,
-          and any variable can be assigned (and re-assigned) values of all
-          types:
-        </Text>{" "}
-        <Text>
-          JavaScript is a loosely typed and dynamic language. Variables in
-          JavaScript are not directly associated with any particular value type,
-          and any variable can be assigned (and re-assigned) values of all
-          types:
-        </Text>{" "}
-        <Text>
-          JavaScript is a loosely typed and dynamic language. Variables in
-          JavaScript are not directly associated with any particular value type,
-          and any variable can be assigned (and re-assigned) values of all
-          types:
-        </Text>{" "}
         <Text>
           JavaScript is a loosely typed and dynamic language. Variables in
           JavaScript are not directly associated with any particular value type,
