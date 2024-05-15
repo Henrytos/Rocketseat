@@ -1,0 +1,13 @@
+{
+  "name": "01-fundamentos-nodejs",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <img alt=\"Rocketseat Education\" src=\"https://avatars.githubusercontent.com/u/69590972?s=200&v=4\" width=\"100px\" /> </p>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -20,6 +20,9 @@ export function HomePage() {
   const githubUser = data as GithubUser;
 
   console.log(githubUser);
+  if (typeof window !== "undefined") {
+    githubUser;
+  }
   return (
     <>
       <Container>
