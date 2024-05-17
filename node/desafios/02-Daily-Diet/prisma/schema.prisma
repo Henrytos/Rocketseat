@@ -19,4 +19,5 @@ model Snack{
   description String
   date_and_time DateTime
   is_inside Boolean
+  session_id String @unique
 }

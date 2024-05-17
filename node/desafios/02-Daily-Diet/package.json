@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "",
-    "start:dev":"tsx watch src/server.ts",
-    "build":"tsup src --out-dir build ",
-    "start":"node build/index.js"
+    "start:dev": "tsx watch src/server.ts",
+    "build": "tsup src --out-dir build ",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cookie": "^9.3.1",
     "@prisma/client": "^5.14.0",
     "dotenv": "^16.4.5",
     "fastify": "^4.27.0",
