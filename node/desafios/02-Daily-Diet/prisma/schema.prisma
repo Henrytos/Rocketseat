@@ -13,11 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Snack{
   id String @id @default(cuid())
   name String
   description String
   date_and_time DateTime
   is_inside Boolean
-  session_id String @unique
+  session_id String
 }
